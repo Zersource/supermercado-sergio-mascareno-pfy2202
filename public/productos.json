@@ -1,0 +1,16 @@
+[
+  { "id": 1,  "nombre": "Arroz grano largo 1 kg",     "categoria": "Despensa",  "precio": 1890, "stock": 120 },
+  { "id": 2,  "nombre": "Fideos espagueti 400 g",     "categoria": "Despensa",  "precio": 990,  "stock": 85 },
+  { "id": 3,  "nombre": "Aceite vegetal 1 L",         "categoria": "Despensa",  "precio": 2790, "stock": 8 },
+  { "id": 4,  "nombre": "Leche entera 1 L",           "categoria": "Lácteos",   "precio": 1190, "stock": 64 },
+  { "id": 5,  "nombre": "Yogurt natural 150 g",       "categoria": "Lácteos",   "precio": 450,  "stock": 5 },
+  { "id": 6,  "nombre": "Queso gauda laminado 250 g", "categoria": "Lácteos",   "precio": 3290, "stock": 30 },
+  { "id": 7,  "nombre": "Manzana roja kg",            "categoria": "Frutas y verduras", "precio": 1590, "stock": 42 },
+  { "id": 8,  "nombre": "Palta hass kg",              "categoria": "Frutas y verduras", "precio": 4990, "stock": 0 },
+  { "id": 9,  "nombre": "Tomate kg",                  "categoria": "Frutas y verduras", "precio": 1790, "stock": 27 },
+  { "id": 10, "nombre": "Detergente líquido 3 L",     "categoria": "Limpieza",  "precio": 6490, "stock": 18 },
+  { "id": 11, "nombre": "Papel higiénico 24 rollos",  "categoria": "Limpieza",  "precio": 8990, "stock": 9 },
+  { "id": 12, "nombre": "Agua mineral 2 L",           "categoria": "Bebidas",   "precio": 890,  "stock": 150 },
+  { "id": 13, "nombre": "Jugo de naranja 1 L",        "categoria": "Bebidas",   "precio": 1490, "stock": 36 },
+  { "id": 14, "nombre": "Café instantáneo 170 g",     "categoria": "Despensa",  "precio": 5990, "stock": 12 }
+]
