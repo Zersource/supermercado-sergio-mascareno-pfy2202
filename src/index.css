@@ -1,0 +1,52 @@
+body {
+  background-color: #f6f8f6;
+  /* espacio para que el menu inferior fijo no tape el contenido */
+  padding-bottom: 76px;
+}
+
+.menu-inferior {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1030;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.menu-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0.25rem;
+  color: #495057;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+.menu-link:hover {
+  color: #198754;
+}
+
+.menu-link.activo {
+  color: #198754;
+  font-weight: 600;
+  box-shadow: inset 0 3px 0 #198754;
+}
+
+.menu-icono {
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+@media (max-width: 400px) {
+  .menu-texto {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .table > :not(caption) > * > * {
+    padding: 0.5rem 0.3rem;
+    font-size: 0.85rem;
+  }
+}
