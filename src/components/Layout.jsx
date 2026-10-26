@@ -8,10 +8,11 @@ function Layout() {
 
   return (
     <>
-      <header className="bg-success text-white py-3">
+      <header className="encabezado-marca py-3">
         <div className="container">
-          <h1 className="h4 mb-0">Supermercado Newen</h1>
-          <p className="mb-0 small">Gestión de inventario</p>
+          <h1 className="marca mb-0">Mi Mercado</h1>
+          <p className="mb-0 eslogan">Los mejores precios cerca de ti</p>
+          <p className="mb-0 small opacity-75">Gestión de inventario</p>
         </div>
       </header>
       <main className="container py-4">

@@ -1,5 +1,59 @@
+/* Paleta propia de Mi Mercado: rojo tomate y amarillo ambar */
+:root {
+  --mm-rojo: #c8201f;
+  --mm-rojo-oscuro: #9e1716;
+  --mm-ambar: #f9b81e;
+  --bs-body-font-family: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+h1, h2, h3, .h3, .marca {
+  font-family: 'Nunito', system-ui, sans-serif;
+  font-weight: 800;
+}
+
+.encabezado-marca {
+  background-color: var(--mm-rojo);
+  color: #fff;
+  border-bottom: 5px solid var(--mm-ambar);
+}
+
+.encabezado-marca .marca {
+  font-size: 1.9rem;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+
+.encabezado-marca .eslogan {
+  color: var(--mm-ambar);
+  font-weight: 700;
+}
+
+.btn-marca {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--mm-rojo);
+  --bs-btn-border-color: var(--mm-rojo);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--mm-rojo-oscuro);
+  --bs-btn-hover-border-color: var(--mm-rojo-oscuro);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--mm-rojo-oscuro);
+  --bs-btn-active-border-color: var(--mm-rojo-oscuro);
+  --bs-btn-focus-shadow-rgb: 200, 32, 31;
+  font-weight: 700;
+}
+
+.text-marca {
+  color: var(--mm-rojo) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--mm-rojo);
+  box-shadow: 0 0 0 0.2rem rgba(200, 32, 31, 0.2);
+}
+
 body {
-  background-color: #f6f8f6;
+  background-color: #fffaf0;
   /* espacio para que el menu inferior fijo no tape el contenido */
   padding-bottom: 76px;
 }
@@ -24,13 +78,13 @@ body {
 }
 
 .menu-link:hover {
-  color: #198754;
+  color: var(--mm-rojo);
 }
 
 .menu-link.activo {
-  color: #198754;
+  color: var(--mm-rojo);
   font-weight: 600;
-  box-shadow: inset 0 3px 0 #198754;
+  box-shadow: inset 0 3px 0 var(--mm-rojo);
 }
 
 .menu-icono {

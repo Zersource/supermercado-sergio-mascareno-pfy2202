@@ -25,7 +25,7 @@ function Home() {
 
       {cargando && (
         <div className="text-center py-5" role="status">
-          <div className="spinner-border text-success" aria-hidden="true"></div>
+          <div className="spinner-border text-marca" aria-hidden="true"></div>
           <p className="mt-2 mb-0">Cargando inventario...</p>
         </div>
       )}

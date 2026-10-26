@@ -1,4 +1,4 @@
-# Supermercado Newen - Gestión de inventario
+# Mi Mercado - Gestión de inventario
 
 Actividad formativa S1 - Desarrollo Frontend II (PFY2202), Duoc UC.
 Autor: Sergio Mascareno.

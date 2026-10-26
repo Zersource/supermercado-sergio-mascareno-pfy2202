@@ -79,7 +79,7 @@ function Contacto() {
           <div id="error-mensaje" className="invalid-feedback">{errores.mensaje}</div>
         </div>
 
-        <button type="submit" className="btn btn-success">Enviar mensaje</button>
+        <button type="submit" className="btn btn-marca">Enviar mensaje</button>
       </form>
     </section>
   )
