@@ -57,3 +57,8 @@ src/
 public/
   productos.json   datos locales del inventario
 ```
+
+## Enlaces
+
+- Repositorio: https://github.com/Zersource/supermercado-sergio-mascareno-pfy2202
+- Deploy: https://zersource.github.io/supermercado-sergio-mascareno-pfy2202/
