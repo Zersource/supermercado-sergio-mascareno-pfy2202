@@ -1,0 +1,100 @@
+[
+  {
+    "id": 1,
+    "nombre": "Arroz integral 1 kg",
+    "categoria": "Despensa",
+    "precio": 2000,
+    "stock": 95
+  },
+  {
+    "id": 2,
+    "nombre": "Fideos tallarín 400 g",
+    "categoria": "Despensa",
+    "precio": 1000,
+    "stock": 110
+  },
+  {
+    "id": 3,
+    "nombre": "Aceite de maravilla 1 L",
+    "categoria": "Despensa",
+    "precio": 3000,
+    "stock": 6
+  },
+  {
+    "id": 4,
+    "nombre": "Leche vegetal 1 L",
+    "categoria": "Lácteos",
+    "precio": 2000,
+    "stock": 48
+  },
+  {
+    "id": 5,
+    "nombre": "Yogurt de frutilla 150 g",
+    "categoria": "Lácteos",
+    "precio": 500,
+    "stock": 9
+  },
+  {
+    "id": 6,
+    "nombre": "Queso mantecoso laminado 250 g",
+    "categoria": "Lácteos",
+    "precio": 4000,
+    "stock": 25
+  },
+  {
+    "id": 7,
+    "nombre": "Manzana verde kg",
+    "categoria": "Frutas y verduras",
+    "precio": 2000,
+    "stock": 60
+  },
+  {
+    "id": 8,
+    "nombre": "Pera kg",
+    "categoria": "Frutas y verduras",
+    "precio": 3000,
+    "stock": 0
+  },
+  {
+    "id": 9,
+    "nombre": "Berenjena kg",
+    "categoria": "Frutas y verduras",
+    "precio": 2000,
+    "stock": 35
+  },
+  {
+    "id": 10,
+    "nombre": "Jabón líquido 3 L",
+    "categoria": "Limpieza",
+    "precio": 7000,
+    "stock": 20
+  },
+  {
+    "id": 11,
+    "nombre": "Papel higiénico doble hoja 12 rollos",
+    "categoria": "Limpieza",
+    "precio": 6000,
+    "stock": 8
+  },
+  {
+    "id": 12,
+    "nombre": "Agua con gas 2 L",
+    "categoria": "Bebidas",
+    "precio": 1000,
+    "stock": 140
+  },
+  {
+    "id": 13,
+    "nombre": "Jugo de manzana 1 L",
+    "categoria": "Bebidas",
+    "precio": 2000,
+    "stock": 40
+  },
+  {
+    "id": 14,
+    "nombre": "Café molido 250 g",
+    "categoria": "Despensa",
+    "precio": 6000,
+    "stock": 15
+  }
+]
