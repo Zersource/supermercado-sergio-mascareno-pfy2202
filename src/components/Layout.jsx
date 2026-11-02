@@ -1,25 +1,25 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom'
+import MenuSuperior from './MenuSuperior.jsx'
 import MenuInferior from './MenuInferior.jsx'
-import { useInventario } from '../hooks/useInventario.js'
 
 function Layout() {
-  // El inventario vive aqui para compartirlo con las rutas hijas via Outlet context
-  const inventario = useInventario()
-
   return (
-    <>
-      <header className="encabezado-marca py-3">
-        <div className="container">
-          <h1 className="marca mb-0">Mi Mercado</h1>
-          <p className="mb-0 eslogan">Los mejores precios cerca de ti</p>
-          <p className="mb-0 small opacity-75">Gestión de inventario</p>
+    <div className="min-h-screen pb-24">
+      <header className="border-b-4 border-ambar bg-marca text-white">
+        <div className="mx-auto max-w-5xl px-4 py-3">
+          <Link to="/" className="block no-underline">
+            <span className="block text-3xl font-extrabold leading-tight tracking-wide text-white">Mi Mercado</span>
+          </Link>
+          <p className="font-bold text-ambar">Los mejores precios cerca de ti</p>
+          <p className="text-sm opacity-75">Gestión de inventario</p>
         </div>
+        <MenuSuperior />
       </header>
-      <main className="container py-4">
-        <Outlet context={inventario} />
+      <main className="mx-auto max-w-5xl px-4 py-6">
+        <Outlet />
       </main>
       <MenuInferior />
-    </>
+    </div>
   )
 }
 

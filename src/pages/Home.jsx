@@ -1,18 +1,27 @@
 import { useState } from 'react'
-import { useOutletContext } from 'react-router-dom'
+import { useInventario } from '../hooks/useInventario.js'
 import { formatearPrecio, normalizar, estadoStock } from '../utils/formato.js'
 
-function Home() {
-  const { productos, cargando, error, cambiarStock, reintentar } = useOutletContext()
-  const [busqueda, setBusqueda] = useState('')
-  const [categoria, setCategoria] = useState('Todas')
+function Tarjeta({ titulo, valor, clase = '' }) {
+  return (
+    <div className="rounded-lg border border-gray-200 bg-white p-4 text-center shadow-sm">
+      <p className="mb-1 text-gray-500">{titulo}</p>
+      <p className={`text-4xl font-bold ${clase}`}>{valor}</p>
+    </div>
+  )
+}
 
-  const categorias = ['Todas', ...new Set(productos.map((p) => p.categoria))]
+function Home() {
+  const { productos, cargando, error, cambiarStock, reintentar } = useInventario()
+  const [busqueda, setBusqueda] = useState('')
+  const [tipo, setTipo] = useState('Todos')
+
+  const tipos = ['Todos', ...new Set(productos.map((p) => p.tipo))]
 
   const visibles = productos.filter((p) => {
     const coincideTexto = normalizar(p.nombre).includes(normalizar(busqueda))
-    const coincideCategoria = categoria === 'Todas' || p.categoria === categoria
-    return coincideTexto && coincideCategoria
+    const coincideTipo = tipo === 'Todos' || p.tipo === tipo
+    return coincideTexto && coincideTipo
   })
 
   const totalUnidades = productos.reduce((acc, p) => acc + p.stock, 0)
@@ -21,19 +30,25 @@ function Home() {
 
   return (
     <section aria-labelledby="titulo-inventario">
-      <h2 id="titulo-inventario" className="h3 mb-3">Inventario</h2>
+      <h2 id="titulo-inventario" className="mb-4 text-2xl">Inventario</h2>
 
       {cargando && (
-        <div className="text-center py-5" role="status">
-          <div className="spinner-border text-marca" aria-hidden="true"></div>
-          <p className="mt-2 mb-0">Cargando inventario...</p>
+        <div className="py-12 text-center" role="status">
+          <div
+            className="mx-auto h-8 w-8 animate-spin rounded-full border-4 border-marca border-t-transparent"
+            aria-hidden="true"
+          ></div>
+          <p className="mt-2">Cargando inventario...</p>
         </div>
       )}
 
       {error && (
-        <div className="alert alert-danger d-flex justify-content-between align-items-center" role="alert">
+        <div
+          className="flex items-center justify-between rounded-md border border-red-300 bg-red-50 p-3 text-red-800"
+          role="alert"
+        >
           <span>{error}</span>
-          <button type="button" className="btn btn-outline-danger btn-sm" onClick={reintentar}>
+          <button type="button" className="btn-paso border-red-400 text-red-800" onClick={reintentar}>
             Reintentar
           </button>
         </div>
@@ -41,105 +56,88 @@ function Home() {
 
       {!cargando && !error && (
         <>
-          <div className="row g-3 mb-4">
-            <div className="col-12 col-md-4">
-              <div className="card h-100 text-center">
-                <div className="card-body">
-                  <p className="text-body-secondary mb-1">Unidades en bodega</p>
-                  <p className="display-6 mb-0">{totalUnidades}</p>
-                </div>
-              </div>
+          <div className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-3">
+            <div className="col-span-2 md:col-span-1">
+              <Tarjeta titulo="Unidades en bodega" valor={totalUnidades} />
             </div>
-            <div className="col-6 col-md-4">
-              <div className="card h-100 text-center">
-                <div className="card-body">
-                  <p className="text-body-secondary mb-1">Stock bajo</p>
-                  <p className="display-6 mb-0 text-warning-emphasis">{stockBajo}</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-6 col-md-4">
-              <div className="card h-100 text-center">
-                <div className="card-body">
-                  <p className="text-body-secondary mb-1">Sin stock</p>
-                  <p className="display-6 mb-0 text-danger">{sinStock}</p>
-                </div>
-              </div>
-            </div>
+            <Tarjeta titulo="Stock bajo" valor={stockBajo} clase="text-amber-700" />
+            <Tarjeta titulo="Sin stock" valor={sinStock} clase="text-red-700" />
           </div>
 
-          <form className="row g-2 mb-3" onSubmit={(e) => e.preventDefault()} role="search">
-            <div className="col-12 col-md-8">
-              <label htmlFor="busqueda" className="form-label visually-hidden">Buscar producto</label>
+          <form className="mb-4 grid gap-2 md:grid-cols-3" onSubmit={(e) => e.preventDefault()} role="search">
+            <div className="md:col-span-2">
+              <label htmlFor="busqueda" className="sr-only">Buscar producto</label>
               <input
                 id="busqueda"
                 type="search"
-                className="form-control"
+                className="campo"
                 placeholder="Buscar producto..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
               />
             </div>
-            <div className="col-12 col-md-4">
-              <label htmlFor="categoria" className="form-label visually-hidden">Categoría</label>
-              <select
-                id="categoria"
-                className="form-select"
-                value={categoria}
-                onChange={(e) => setCategoria(e.target.value)}
-              >
-                {categorias.map((c) => (
-                  <option key={c} value={c}>{c}</option>
+            <div>
+              <label htmlFor="tipo" className="sr-only">Tipo de producto</label>
+              <select id="tipo" className="campo" value={tipo} onChange={(e) => setTipo(e.target.value)}>
+                {tipos.map((t) => (
+                  <option key={t} value={t}>{t}</option>
                 ))}
               </select>
             </div>
           </form>
 
-          <div className="table-responsive bg-white rounded border">
-            <table className="table table-hover align-middle mb-0">
-              <thead className="table-light">
+          <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
+            <table className="w-full text-left text-sm sm:text-base">
+              <thead className="bg-gray-100 text-gray-700">
                 <tr>
-                  <th scope="col">Producto</th>
-                  <th scope="col" className="d-none d-md-table-cell">Categoría</th>
-                  <th scope="col" className="text-end">Precio</th>
-                  <th scope="col" className="text-center">Stock</th>
-                  <th scope="col">Estado</th>
+                  <th scope="col" className="px-1.5 py-2 sm:px-3">Producto</th>
+                  <th scope="col" className="hidden px-1.5 py-2 sm:px-3 md:table-cell">Tipo</th>
+                  <th scope="col" className="px-1.5 py-2 sm:px-3 text-right">Precio</th>
+                  <th scope="col" className="px-1.5 py-2 sm:px-3 text-center">Stock</th>
+                  <th scope="col" className="px-1.5 py-2 sm:px-3">Estado</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-100">
                 {visibles.map((p) => {
                   const estado = estadoStock(p.stock)
                   return (
-                    <tr key={p.id}>
-                      <td>{p.nombre}</td>
-                      <td className="d-none d-md-table-cell">{p.categoria}</td>
-                      <td className="text-end">{formatearPrecio(p.precio)}</td>
-                      <td className="text-center text-nowrap">
+                    <tr key={p.id} className="hover:bg-gray-50">
+                      <td className="px-1.5 py-2 sm:px-3">
+                        {p.nombre}
+                        <span className="block text-xs text-gray-500">{p.marca}</span>
+                      </td>
+                      <td className="hidden px-1.5 py-2 sm:px-3 md:table-cell">{p.tipo}</td>
+                      <td className="px-1.5 py-2 sm:px-3 text-right">{formatearPrecio(p.precio)}</td>
+                      <td className="whitespace-nowrap px-1.5 py-2 sm:px-3 text-center">
                         <button
                           type="button"
-                          className="btn btn-outline-secondary btn-sm"
+                          className="btn-paso px-1.5 sm:px-2"
                           aria-label={`Restar una unidad de ${p.nombre}`}
                           onClick={() => cambiarStock(p.id, -1)}
                         >
                           -
                         </button>
-                        <span className="mx-2">{p.stock}</span>
+                        <span className="stock mx-1 sm:mx-2">{p.stock}</span>
                         <button
                           type="button"
-                          className="btn btn-outline-secondary btn-sm"
+                          className="btn-paso px-1.5 sm:px-2"
                           aria-label={`Sumar una unidad de ${p.nombre}`}
                           onClick={() => cambiarStock(p.id, 1)}
                         >
                           +
                         </button>
                       </td>
-                      <td><span className={`badge ${estado.clase}`}>{estado.etiqueta}</span></td>
+                      <td className="px-1.5 py-2 sm:px-3">
+                        <span className={`inline-block whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-bold ${estado.clase}`}>
+                          {estado.etiqueta}
+                        </span>
+                      </td>
                     </tr>
                   )
                 })}
                 {visibles.length === 0 && (
                   <tr>
-                    <td colSpan="5" className="text-center py-4">No hay productos que coincidan con la búsqueda.</td>
+                    <td colSpan="5" className="px-3 py-6 text-center">No hay productos que coincidan con la búsqueda.</td>
                   </tr>
                 )}
               </tbody>

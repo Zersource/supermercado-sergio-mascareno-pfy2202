@@ -26,60 +26,65 @@ function Contacto() {
     setDatos(vacio)
   }
 
+  const clase = (nombre) => 'campo' + (errores[nombre] ? ' campo-error' : '')
+
   return (
-    <section aria-labelledby="titulo-contacto">
-      <h2 id="titulo-contacto" className="h3 mb-3">Contáctanos</h2>
+    <section aria-labelledby="titulo-contacto" className="mx-auto max-w-xl">
+      <h2 id="titulo-contacto" className="mb-4 text-2xl">Contáctanos</h2>
 
       {enviado && (
-        <div className="alert alert-success" role="status">
+        <div className="mb-4 rounded-md border border-green-300 bg-green-50 p-3 text-green-800" role="status">
           Gracias por escribirnos. Tu mensaje fue recibido.
         </div>
       )}
 
-      <form onSubmit={manejarEnvio} noValidate className="bg-white border rounded p-3">
-        <div className="mb-3">
-          <label htmlFor="nombre" className="form-label">Nombre</label>
+      <form onSubmit={manejarEnvio} noValidate className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+        <div>
+          <label htmlFor="nombre" className="mb-1 block font-bold">Nombre</label>
           <input
             id="nombre"
             name="nombre"
             type="text"
-            className={`form-control ${errores.nombre ? 'is-invalid' : ''}`}
+            className={clase('nombre')}
             value={datos.nombre}
             onChange={manejarCambio}
+            aria-invalid={errores.nombre ? 'true' : 'false'}
             aria-describedby="error-nombre"
           />
-          <div id="error-nombre" className="invalid-feedback">{errores.nombre}</div>
+          <p id="error-nombre" className="mt-1 text-sm text-red-700">{errores.nombre}</p>
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Correo</label>
+        <div>
+          <label htmlFor="email" className="mb-1 block font-bold">Correo</label>
           <input
             id="email"
             name="email"
             type="email"
-            className={`form-control ${errores.email ? 'is-invalid' : ''}`}
+            className={clase('email')}
             value={datos.email}
             onChange={manejarCambio}
+            aria-invalid={errores.email ? 'true' : 'false'}
             aria-describedby="error-email"
           />
-          <div id="error-email" className="invalid-feedback">{errores.email}</div>
+          <p id="error-email" className="mt-1 text-sm text-red-700">{errores.email}</p>
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="mensaje" className="form-label">Mensaje</label>
+        <div>
+          <label htmlFor="mensaje" className="mb-1 block font-bold">Mensaje</label>
           <textarea
             id="mensaje"
             name="mensaje"
             rows="4"
-            className={`form-control ${errores.mensaje ? 'is-invalid' : ''}`}
+            className={clase('mensaje')}
             value={datos.mensaje}
             onChange={manejarCambio}
+            aria-invalid={errores.mensaje ? 'true' : 'false'}
             aria-describedby="error-mensaje"
           ></textarea>
-          <div id="error-mensaje" className="invalid-feedback">{errores.mensaje}</div>
+          <p id="error-mensaje" className="mt-1 text-sm text-red-700">{errores.mensaje}</p>
         </div>
 
-        <button type="submit" className="btn btn-marca">Enviar mensaje</button>
+        <button type="submit" className="btn-marca">Enviar mensaje</button>
       </form>
     </section>
   )

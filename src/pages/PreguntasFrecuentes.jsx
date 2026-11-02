@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 const preguntas = [
   {
     id: 'p1',
@@ -15,16 +17,22 @@ const preguntas = [
     id: 'p3',
     pregunta: '¿Puedo buscar o filtrar productos?',
     respuesta:
-      'Sí. Usa el buscador por nombre (ignora tildes y mayúsculas) y el selector de categoría. Ambos filtros funcionan al mismo tiempo.',
+      'Sí. Usa el buscador por nombre (ignora tildes y mayúsculas) y el selector de tipo de producto. Ambos filtros funcionan al mismo tiempo.',
   },
   {
     id: 'p4',
-    pregunta: '¿Los cambios de stock se guardan?',
+    pregunta: '¿Cómo agrego un artículo nuevo?',
     respuesta:
-      'En esta versión los cambios viven en el estado de la aplicación: se mantienen mientras navegas entre páginas, pero se reinician al recargar el navegador. La persistencia queda para una etapa posterior.',
+      'Entra a Agregar artículo en el menú superior, completa nombre, marca, tipo de producto, precio y stock inicial, y presiona Agregar al inventario. El artículo aparece de inmediato en el inicio y en el Listado de artículos.',
   },
   {
     id: 'p5',
+    pregunta: '¿Los cambios se guardan?',
+    respuesta:
+      'En esta versión los cambios viven en el estado global de la aplicación: se mantienen mientras navegas entre páginas, pero se reinician al recargar el navegador. La persistencia queda para una etapa posterior.',
+  },
+  {
+    id: 'p6',
     pregunta: '¿Cómo me comunico con el equipo?',
     respuesta:
       'Desde la página Contáctanos, en el menú inferior, puedes enviar un mensaje con tu nombre y correo.',
@@ -32,29 +40,45 @@ const preguntas = [
 ]
 
 function PreguntasFrecuentes() {
+  // Solo una respuesta abierta a la vez; la primera parte abierta
+  const [abierta, setAbierta] = useState('p1')
+
   return (
     <section aria-labelledby="titulo-faq">
-      <h2 id="titulo-faq" className="h3 mb-3">Preguntas frecuentes</h2>
-      <div className="accordion" id="faq">
-        {preguntas.map((p, i) => (
-          <div className="accordion-item" key={p.id}>
-            <h3 className="accordion-header">
-              <button
-                className={`accordion-button ${i === 0 ? '' : 'collapsed'}`}
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target={`#${p.id}`}
-                aria-expanded={i === 0}
-                aria-controls={p.id}
+      <h2 id="titulo-faq" className="mb-4 text-2xl">Preguntas frecuentes</h2>
+      <div className="divide-y divide-gray-200 overflow-hidden rounded-lg border border-gray-200 bg-white">
+        {preguntas.map((p) => {
+          const estaAbierta = abierta === p.id
+          return (
+            <div key={p.id}>
+              <h3 className="text-base">
+                <button
+                  type="button"
+                  className={
+                    'acordeon-boton flex w-full items-center justify-between px-4 py-3 text-left font-bold hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-marca/40 ' +
+                    (estaAbierta ? 'bg-red-50 text-marca' : '')
+                  }
+                  aria-expanded={estaAbierta}
+                  aria-controls={`respuesta-${p.id}`}
+                  id={`pregunta-${p.id}`}
+                  onClick={() => setAbierta(estaAbierta ? '' : p.id)}
+                >
+                  {p.pregunta}
+                  <span aria-hidden="true" className="ml-3">{estaAbierta ? '−' : '+'}</span>
+                </button>
+              </h3>
+              <div
+                id={`respuesta-${p.id}`}
+                role="region"
+                aria-labelledby={`pregunta-${p.id}`}
+                hidden={!estaAbierta}
+                className="px-4 py-3 text-gray-700"
               >
-                {p.pregunta}
-              </button>
-            </h3>
-            <div id={p.id} className={`accordion-collapse collapse ${i === 0 ? 'show' : ''}`} data-bs-parent="#faq">
-              <div className="accordion-body">{p.respuesta}</div>
+                {p.respuesta}
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )
