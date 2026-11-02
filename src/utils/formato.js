@@ -5,12 +5,12 @@ export function formatearPrecio(valor) {
 
 // Quita tildes y pasa a minusculas para comparar en busquedas
 export function normalizar(texto) {
-  return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+  return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
 }
 
-// Clasificacion de stock: sin stock, bajo o normal
+// Clasificacion de stock: sin stock, bajo o normal (clases de Tailwind)
 export function estadoStock(stock) {
-  if (stock === 0) return { etiqueta: 'Sin stock', clase: 'text-bg-danger' }
-  if (stock <= 10) return { etiqueta: 'Stock bajo', clase: 'text-bg-warning' }
-  return { etiqueta: 'Disponible', clase: 'text-bg-success' }
+  if (stock === 0) return { etiqueta: 'Sin stock', clase: 'bg-red-100 text-red-800' }
+  if (stock <= 10) return { etiqueta: 'Stock bajo', clase: 'bg-amber-100 text-amber-800' }
+  return { etiqueta: 'Disponible', clase: 'bg-green-100 text-green-800' }
 }
