@@ -1,28 +1,47 @@
 # Mi Mercado - Gestión de inventario
 
-Actividad formativa S1 - Desarrollo Frontend II (PFY2202), Duoc UC.
+Actividad formativa S2 - Desarrollo Frontend II (PFY2202), Duoc UC.
 Autor: Sergio Mascareno.
 
-Sitio de gestion de inventario para un supermercado, hecho con React 19, Vite,
-React Router 6 y Bootstrap 5.3.3. Es una SPA con home y dos paginas adicionales,
-navegables desde un menu inferior fijo.
+Continuación de la actividad formativa 1. Sitio de gestión de inventario para un
+supermercado, hecho con React 19, Vite, React Router 6 y Tailwind CSS 3. Se agrega
+un menú superior con dos páginas nuevas, un estado global para los artículos
+(Context API + `useReducer`) y Tailwind CSS como framework de estilos.
 
 ## Requerimientos de la actividad
 
 | Requerimiento | Donde esta |
 |---|---|
-| Sitio de inventario para supermercado (HTML, CSS, JS, React) | Todo el proyecto |
-| Pagina principal (home) | `src/pages/Home.jsx` (tabla de inventario, busqueda, filtro, ajuste de stock) |
-| Menu inferior con navegacion a dos paginas | `src/components/MenuInferior.jsx` |
-| Pagina adicional 1: Preguntas frecuentes | `src/pages/PreguntasFrecuentes.jsx` |
-| Pagina adicional 2: Contáctanos | `src/pages/Contacto.jsx` (formulario con validacion) |
-| React Router configurado | `src/main.jsx` (HashRouter), `src/App.jsx` (Routes/Route), `Layout` con Outlet, NavLink en el menu |
+| Continuar el sitio de la actividad formativa 1 | Mismo proyecto: home, menú inferior, Preguntas frecuentes y Contáctanos se mantienen |
+| Nuevo menú que navega a otras dos páginas | `src/components/MenuSuperior.jsx` (Agregar artículo, Listado de artículos) |
+| Página para ingresar nuevos artículos | `src/pages/AgregarArticulo.jsx` (formulario con validación) |
+| Estado global con lista de artículos (nombre, marca y tipo de producto) | `src/context/InventarioContext.jsx` (`useReducer`) y `src/hooks/useInventario.js` |
+| Formulario para agregar artículos | `src/pages/AgregarArticulo.jsx` + `src/utils/validaciones.js` |
+| Página que lista en una tabla todos los artículos | `src/pages/ListadoArticulos.jsx` |
+| Framework de CSS | Tailwind CSS 3: `tailwind.config.js`, `postcss.config.js`, `src/index.css` y clases de utilidad en los componentes |
+
+## Estado global
+
+Cada artículo tiene `id`, `nombre`, `marca`, `tipo`, `precio` y `stock`. El estado
+vive en `InventarioProvider` (envuelve la app en `main.jsx`) y se modifica solo con
+acciones del reducer (objetos `{ type, payload }` definidos en la constante `ACTIONS`):
+
+| Acción | Efecto |
+|---|---|
+| `CARGA_INICIO`, `CARGA_EXITO`, `CARGA_ERROR` | Carga del inventario desde `public/productos.json` |
+| `CAMBIAR_STOCK` | Suma o resta stock (botones + y - del inicio) |
+| `AGREGAR_ARTICULO` | Agrega un artículo nuevo con id correlativo |
+
+Las tres páginas que muestran artículos (inicio, formulario y listado) leen el mismo
+estado con `useInventario()`, por eso un artículo agregado aparece al instante en todas.
 
 ## Rutas
 
 | Ruta | Pagina |
 |---|---|
-| `#/` | Inicio (inventario) |
+| `#/` | Inicio (inventario, búsqueda, filtro por tipo y ajuste de stock) |
+| `#/agregar-articulo` | Agregar artículo |
+| `#/articulos` | Listado de artículos (tabla) |
 | `#/preguntas-frecuentes` | Preguntas frecuentes |
 | `#/contactanos` | Contáctanos |
 | cualquier otra | Pagina no encontrada (404) |
@@ -50,15 +69,16 @@ node pruebas/e2e.mjs
 
 ```
 src/
-  components/   Layout.jsx (comparte el inventario via Outlet context), MenuInferior.jsx
-  hooks/        useInventario.js (fetch + estado del inventario)
-  pages/        Home.jsx, PreguntasFrecuentes.jsx, Contacto.jsx, NoEncontrada.jsx
-  utils/        formato.js, validaciones.js
+  components/   Layout.jsx, MenuSuperior.jsx, MenuInferior.jsx
+  context/      InventarioContext.jsx (reducer + provider del estado global)
+  hooks/        useInventario.js (acceso al contexto)
+  pages/        Home, AgregarArticulo, ListadoArticulos, PreguntasFrecuentes, Contacto, NoEncontrada
+  utils/        formato.js, tipos.js, validaciones.js
 public/
-  productos.json   datos locales del inventario
+  productos.json   datos locales del inventario (nombre, marca, tipo, precio, stock)
 ```
 
-## Enlaces
+## Nota
 
-- Repositorio: https://github.com/Zersource/supermercado-sergio-mascareno-pfy2202
-- Deploy: https://zersource.github.io/supermercado-sergio-mascareno-pfy2202/
+Los cambios (stock y artículos nuevos) viven en el estado de la aplicación: se
+mantienen al navegar entre páginas y se reinician al recargar el navegador.
