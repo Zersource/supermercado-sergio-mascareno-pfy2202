@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useInventario } from '../hooks/useInventario.js'
+import EstadoInventario from '../components/EstadoInventario.jsx'
+import Boton from '../components/ui/Boton.jsx'
 import { TIPOS_PRODUCTO } from '../utils/tipos.js'
 import { validarArticulo, hayErrores } from '../utils/validaciones.js'
 
@@ -46,29 +48,15 @@ function AgregarArticulo() {
     <section aria-labelledby="titulo-agregar" className="mx-auto max-w-xl">
       <h2 id="titulo-agregar" className="mb-4 text-2xl">Agregar artículo</h2>
 
-      {cargando && <p role="status">Cargando inventario...</p>}
-
-      {error && (
-        <div
-          className="flex items-center justify-between rounded-md border border-red-300 bg-red-50 p-3 text-red-800"
-          role="alert"
-        >
-          <span>{error}</span>
-          <button type="button" className="btn-paso border-red-400 text-red-800" onClick={reintentar}>
-            Reintentar
-          </button>
-        </div>
-      )}
-
       {agregado && (
-        <div className="mb-4 rounded-md border border-green-300 bg-green-50 p-3 text-green-800" role="status">
+        <div className="aviso-exito mb-4" role="status">
           «{agregado}» se agregó al inventario.{' '}
           <Link to="/articulos" className="font-bold underline">Ver listado</Link>
         </div>
       )}
 
-      {!cargando && !error && (
-        <form onSubmit={manejarEnvio} noValidate className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+      <EstadoInventario cargando={cargando} error={error} reintentar={reintentar}>
+        <form onSubmit={manejarEnvio} noValidate className="tarjeta space-y-4">
           <div>
             <label htmlFor="nombre" className="mb-1 block font-bold">Nombre</label>
             <input
@@ -155,9 +143,9 @@ function AgregarArticulo() {
             </div>
           </div>
 
-          <button type="submit" className="btn-marca">Agregar al inventario</button>
+          <Boton type="submit">Agregar al inventario</Boton>
         </form>
-      )}
+      </EstadoInventario>
     </section>
   )
 }

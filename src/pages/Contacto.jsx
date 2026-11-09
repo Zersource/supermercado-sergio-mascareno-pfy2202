@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Boton from '../components/ui/Boton.jsx'
 import { validarContacto, hayErrores } from '../utils/validaciones.js'
 
 const vacio = { nombre: '', email: '', mensaje: '' }
@@ -84,7 +85,7 @@ function Contacto() {
           <p id="error-mensaje" className="mt-1 text-sm text-red-700">{errores.mensaje}</p>
         </div>
 
-        <button type="submit" className="btn-marca">Enviar mensaje</button>
+        <Boton type="submit">Enviar mensaje</Boton>
       </form>
     </section>
   )

@@ -11,7 +11,8 @@
   }
 }
 
-/* Clases reutilizables armadas con utilidades de Tailwind */
+/* Clases reutilizables armadas con utilidades de Tailwind (@apply).
+   Los componentes de src/components/ui las usan para mantener un solo estilo. */
 @layer components {
   .campo {
     @apply block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-base
@@ -20,12 +21,43 @@
   .campo-error {
     @apply border-red-600 focus:border-red-600 focus:ring-red-600/30;
   }
+
+  /* Botones: una clase por variante, con estados hover, focus y disabled */
   .btn-marca {
-    @apply inline-block rounded-md bg-marca px-4 py-2 font-bold text-white
-           hover:bg-marca-oscuro focus:outline-none focus:ring-2 focus:ring-marca/40;
+    @apply inline-block rounded-md bg-marca px-4 py-2 text-center font-bold text-white
+           hover:bg-marca-oscuro focus:outline-none focus:ring-2 focus:ring-marca/40
+           disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-marca;
+  }
+  .btn-secundario {
+    @apply inline-block rounded-md border border-marca bg-white px-4 py-2 text-center font-bold text-marca
+           hover:bg-marca/10 focus:outline-none focus:ring-2 focus:ring-marca/40
+           disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-peligro {
+    @apply inline-block rounded-md border border-red-300 bg-white px-3 py-1 text-sm font-bold text-red-700
+           hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-300
+           disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-paso {
     @apply rounded border border-gray-300 bg-white px-2 py-0.5 text-gray-700
-           hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-marca/30;
+           hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-marca/30
+           disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white;
+  }
+
+  /* Tarjeta blanca y contenedor de tabla con scroll horizontal en pantallas chicas */
+  .tarjeta {
+    @apply rounded-lg border border-gray-200 bg-white p-4 shadow-sm;
+  }
+  .tabla-contenedor {
+    @apply overflow-x-auto rounded-lg border border-gray-200 bg-white;
+  }
+  .tabla {
+    @apply w-full text-left text-sm sm:text-base;
+  }
+  .alerta-error {
+    @apply flex items-center justify-between gap-3 rounded-md border border-red-300 bg-red-50 p-3 text-red-800;
+  }
+  .aviso-exito {
+    @apply rounded-md border border-green-300 bg-green-50 p-3 text-green-800;
   }
 }

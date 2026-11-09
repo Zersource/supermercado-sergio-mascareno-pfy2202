@@ -17,7 +17,7 @@ const preguntas = [
     id: 'p3',
     pregunta: '¿Puedo buscar o filtrar productos?',
     respuesta:
-      'Sí. Usa el buscador por nombre (ignora tildes y mayúsculas) y el selector de tipo de producto. Ambos filtros funcionan al mismo tiempo.',
+      'Sí. En el inicio, usa el buscador por nombre (ignora tildes y mayúsculas) y el selector de tipo de producto; ambos funcionan al mismo tiempo. En el Listado de artículos hay además un filtro por categoría: al elegir una, la tabla muestra solo esos artículos y el contador indica cuántos son del total.',
   },
   {
     id: 'p4',
@@ -29,7 +29,19 @@ const preguntas = [
     id: 'p5',
     pregunta: '¿Los cambios se guardan?',
     respuesta:
-      'En esta versión los cambios viven en el estado global de la aplicación: se mantienen mientras navegas entre páginas, pero se reinician al recargar el navegador. La persistencia queda para una etapa posterior.',
+      'En esta versión los cambios (stock, artículos nuevos y carrito) viven en el estado global de la aplicación: se mantienen mientras navegas entre páginas, pero se reinician al recargar el navegador. La persistencia queda para una etapa posterior.',
+  },
+  {
+    id: 'p7',
+    pregunta: '¿Cómo agrego un artículo al carrito?',
+    respuesta:
+      'En el Listado de artículos haz clic en el artículo para abrir su detalle, elige la cantidad y presiona Agregar al carrito. Esas unidades se descuentan del inventario al instante.',
+  },
+  {
+    id: 'p8',
+    pregunta: '¿Qué pasa con el stock si cambio el carrito?',
+    respuesta:
+      'En la página Carrito puedes subir o bajar la cantidad de cada artículo, o quitarlo. Cada cambio actualiza el inventario general: al bajar la cantidad o quitar el artículo, las unidades vuelven al stock, y no puedes pedir más de las que hay disponibles.',
   },
   {
     id: 'p6',
