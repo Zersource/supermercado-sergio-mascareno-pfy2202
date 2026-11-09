@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DyZJNswf.js";var t=e();function n({titulo:e,valor:n,clase:r=``}){return(0,t.jsxs)(`div`,{className:`tarjeta text-center`,children:[(0,t.jsx)(`p`,{className:`mb-1 text-gray-500`,children:e}),(0,t.jsx)(`p`,{className:`text-3xl font-bold sm:text-4xl ${r}`,children:n})]})}export{n as t};

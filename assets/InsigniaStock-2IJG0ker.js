@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DyZJNswf.js";import{t}from"./formato-CbNoNHVy.js";var n=e();function r({stock:e}){let r=t(e);return(0,n.jsx)(`span`,{className:`inline-block whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-bold ${r.clase}`,children:r.etiqueta})}export{r as t};

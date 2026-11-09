@@ -1,0 +1,1 @@
+function e(e){return`$`+e.toLocaleString(`es-CL`)}function t(e){return e.normalize(`NFD`).replace(/[̀-ͯ]/g,``).toLowerCase()}function n(e){return e===0?{etiqueta:`Sin stock`,clase:`bg-red-100 text-red-800`}:e<=10?{etiqueta:`Stock bajo`,clase:`bg-amber-100 text-amber-800`}:{etiqueta:`Disponible`,clase:`bg-green-100 text-green-800`}}export{e as n,t as r,n as t};
